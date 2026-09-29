@@ -29,3 +29,6 @@ dist-ssr
 # Vercel
 .vercel
 
+# Local planning
+implementation_plan (1).md
+
