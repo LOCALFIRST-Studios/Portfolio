@@ -20,12 +20,18 @@ export default function Seo({ title, description, path = "/" }) {
       el.setAttribute("content", value);
     };
 
+    const ogImage = `${SITE.url}/og-image.svg`;
+    
     setMeta('meta[name="description"]', "description", description);
     setMeta('meta[property="og:title"]', "og:title", fullTitle);
     setMeta('meta[property="og:description"]', "og:description", description);
     setMeta('meta[property="og:type"]', "og:type", "website");
     setMeta('meta[property="og:url"]', "og:url", `${SITE.url}${path}`);
+    setMeta('meta[property="og:image"]', "og:image", ogImage);
+    setMeta('meta[property="og:image:width"]', "og:image:width", "1200");
+    setMeta('meta[property="og:image:height"]', "og:image:height", "630");
     setMeta('meta[name="twitter:card"]', "twitter:card", "summary_large_image");
+    setMeta('meta[name="twitter:image"]', "twitter:image", ogImage);
 
     let canonical = document.head.querySelector('link[rel="canonical"]');
     if (!canonical) {

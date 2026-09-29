@@ -18,7 +18,7 @@ export default function Stats() {
       const raw = el.dataset.count;
       if (raw === "∞") return undefined;
       if (reduced) {
-        el.textContent = raw.includes("%") ? "100%" : "7–14";
+        el.textContent = raw.includes("%") ? "100%" : raw;
         return undefined;
       }
       if (raw.includes("%")) {
@@ -30,6 +30,18 @@ export default function Stats() {
           scrollTrigger: { trigger: el, start: "top 85%" },
           onUpdate: () => {
             el.textContent = `${Math.round(obj.val)}%`;
+          },
+        });
+      }
+      if (raw.includes("–")) {
+        const obj = { val: 7 };
+        return gsap.to(obj, {
+          val: 14,
+          duration: 1.2,
+          ease: "power2.out",
+          scrollTrigger: { trigger: el, start: "top 85%" },
+          onUpdate: () => {
+            el.textContent = `${Math.round(obj.val)}–14`;
           },
         });
       }

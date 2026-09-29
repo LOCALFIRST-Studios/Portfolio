@@ -148,6 +148,10 @@
     animation: marquee-x 42s linear infinite;
   }
 
+  .marquee-reverse {
+    animation: marquee-x 42s linear infinite reverse;
+  }
+
   .marquee,
   .marquee-reverse {
     animation-play-state: running;

@@ -1,11 +1,28 @@
 import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 import { SITE } from "../../data/site";
 import useReducedMotion from "../../hooks/useReducedMotion";
 
 export default function Preloader({ onDone }) {
   const [progress, setProgress] = useState(0);
+  const elementRef = useRef(null);
   const reduced = useReducedMotion();
   const done = useRef(false);
+
+  const animateOut = useRef(() => {
+    if (reduced || !elementRef.current) {
+      onDone();
+      return;
+    }
+
+    // Clip-path wipe from bottom to top
+    gsap.to(elementRef.current, {
+      clipPath: "inset(100% 0 0 0)",
+      duration: 0.7,
+      ease: "power2.inOut",
+      onComplete: onDone,
+    });
+  });
 
   useEffect(() => {
     if (sessionStorage.getItem("lf-preloader") === "1") {
@@ -31,7 +48,7 @@ export default function Preloader({ onDone }) {
       } else if (!done.current) {
         done.current = true;
         sessionStorage.setItem("lf-preloader", "1");
-        setTimeout(onDone, 180);
+        setTimeout(animateOut.current, 180);
       }
     };
 
@@ -41,7 +58,9 @@ export default function Preloader({ onDone }) {
 
   return (
     <div
+      ref={elementRef}
       className="fixed inset-0 z-[80] flex flex-col justify-between bg-bg px-8 py-10"
+      style={{ clipPath: "inset(0 0 0 0)" }}
       role="status"
       aria-live="polite"
       aria-label="Loading"

@@ -14,6 +14,14 @@ export const pricingTiers = [
       "Deployment",
       "1 revision",
     ],
+    comparison: {
+      pages: "3–4",
+      customUI: "Clean layout",
+      contact: "Yes",
+      seo: "Yes",
+      sourceCode: "On request",
+      revisions: "1",
+    },
   },
   {
     id: "professional",
@@ -38,6 +46,14 @@ export const pricingTiers = [
       "2 revisions",
       "15-day bug support",
     ],
+    comparison: {
+      pages: "6–8",
+      customUI: "Premium custom",
+      contact: "Yes",
+      seo: "Yes",
+      sourceCode: "Yes",
+      revisions: "2",
+    },
   },
   {
     id: "custom",
@@ -52,7 +68,24 @@ export const pricingTiers = [
       "Custom dashboards",
       "Other custom functionality",
     ],
+    comparison: {
+      pages: "Scoped",
+      customUI: "Custom",
+      contact: "Yes",
+      seo: "As scoped",
+      sourceCode: "Yes",
+      revisions: "As scoped",
+    },
   },
+];
+
+export const comparisonRows = [
+  { key: "pages", label: "Pages / sections" },
+  { key: "customUI", label: "Custom UI" },
+  { key: "contact", label: "WhatsApp / contact" },
+  { key: "seo", label: "Basic SEO setup" },
+  { key: "sourceCode", label: "Source code" },
+  { key: "revisions", label: "Revisions" },
 ];
 
 export const addOns = [

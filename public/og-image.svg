@@ -1,0 +1,32 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#070b0d"/>
+  
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1a1f24" stroke-width="1" opacity="0.3"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  
+  <!-- Content -->
+  <g transform="translate(120, 180)">
+    <!-- Studio name -->
+    <text x="0" y="0" fill="#22d3ee" font-family="system-ui, sans-serif" font-size="32" font-weight="600" letter-spacing="0.2em">LOCAL FIRST</text>
+    
+    <!-- Main headline -->
+    <text x="0" y="80" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="56" font-weight="700" letter-spacing="-0.02em">
+      <tspan x="0" dy="0">DIGITAL EXPERIENCES</tspan>
+      <tspan x="0" dy="70">THAT GET NOTICED</tspan>
+    </text>
+    
+    <!-- Tagline -->
+    <text x="0" y="240" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="24">Premium websites for local businesses</text>
+  </g>
+  
+  <!-- Accent element -->
+  <circle cx="1000" cy="150" r="2" fill="#22d3ee" opacity="0.6"/>
+  <circle cx="1050" cy="200" r="1.5" fill="#22d3ee" opacity="0.4"/>
+  <circle cx="980" cy="250" r="1" fill="#22d3ee" opacity="0.5"/>
+</svg>

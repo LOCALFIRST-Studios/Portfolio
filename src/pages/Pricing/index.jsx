@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import MagneticButton from "../../components/MagneticButton";
 import Container from "../../components/Container";
 import Seo from "../../components/Seo";
-import { addOns, includedEverywhere, pricingNotes, pricingTiers } from "../../data/pricing";
+import { addOns, includedEverywhere, pricingNotes, pricingTiers, comparisonRows } from "../../data/pricing";
 import { faqs } from "../../data/services";
 
 export default function Pricing() {
@@ -64,18 +64,12 @@ export default function Pricing() {
                 </tr>
               </thead>
               <tbody>
-                {[
-                  ["Pages / sections", "3–4", "6–8", "Scoped"],
-                  ["Custom UI", "Clean layout", "Premium custom", "Custom"],
-                  ["WhatsApp / contact", "Yes", "Yes", "Yes"],
-                  ["Basic SEO setup", "Yes", "Yes", "As scoped"],
-                  ["Source code", "On request", "Yes", "Yes"],
-                  ["Revisions", "1", "2", "As scoped"],
-                ].map((row) => (
-                  <tr key={row[0]} className="border-b border-line">
-                    {row.map((cell) => (
-                      <td key={cell} className="py-3">
-                        {cell}
+                {comparisonRows.map((row) => (
+                  <tr key={row.key} className="border-b border-line">
+                    <td className="py-3">{row.label}</td>
+                    {pricingTiers.map((tier) => (
+                      <td key={tier.id} className="py-3">
+                        {tier.comparison[row.key]}
                       </td>
                     ))}
                   </tr>
