@@ -1,14 +1,11 @@
-import { ThemeVariant, useThemeValue, useThemeClasses } from "../ThemeVariant";
+import { ThemeVariant, useThemeClasses } from "../ThemeVariant";
 import { useTheme } from "../../contexts/ThemeContext";
 
 export default function ThemeDemo() {
   const { currentTheme, themeConfig } = useTheme();
   
-  // Example of conditional values
-  const greeting = useThemeValue(
-    "Welcome to Local First",
-    "Welcome to Local First Studios"
-  );
+  // Example of conditional values - ONLY for demo purposes
+  const greeting = "Welcome to Local First Studios";
   
   // Example of conditional classes
   const cardClasses = useThemeClasses(

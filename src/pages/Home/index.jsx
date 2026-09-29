@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <div ref={root}>
       <Seo
-        title="Websites for local businesses"
+        title="Local First Studios"
         description="Premium websites for gyms, salons, cafés, PGs and ambitious local businesses."
         path="/"
       />

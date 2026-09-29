@@ -24,6 +24,7 @@
   --color-accent: #22d3ee;
   --color-accent-soft: rgba(34, 211, 238, 0.12);
   --color-accent-glow: rgba(34, 211, 238, 0.28);
+  --color-scene: #22d3ee;
 
   --color-bg-night: #07090d;
   --color-bg-elevated-night: #0c1016;
@@ -35,6 +36,7 @@
   --color-accent-night: #22d3ee;
   --color-accent-soft-night: rgba(34, 211, 238, 0.12);
   --color-accent-glow-night: rgba(34, 211, 238, 0.28);
+  --color-scene-night: #22d3ee;
 
   /* Day Theme Colors (Light Editorial) */
   --color-bg-day: #fefcfb;
@@ -47,6 +49,7 @@
   --color-accent-day: #d97706;
   --color-accent-soft-day: rgba(217, 119, 6, 0.08);
   --color-accent-glow-day: rgba(217, 119, 6, 0.15);
+  --color-scene-day: #d97706;
 
   /* Spacing */
   --spacing-gutter: clamp(1.25rem, 4vw, 2.5rem);
@@ -264,36 +267,6 @@
     backdrop-filter: blur(16px);
     border: 1px solid var(--color-line);
   }
-
-  .marquee {
-    animation: marquee-x 42s linear infinite;
-  }
-
-  .marquee-reverse {
-    animation: marquee-x 42s linear infinite reverse;
-  }
-
-  .marquee,
-  .marquee-reverse {
-    animation-play-state: running;
-  }
-
-  @media (hover: hover) {
-    section:hover .marquee,
-    section:hover .marquee-reverse {
-      animation-play-state: paused;
-    }
-  }
-}
-
-@keyframes marquee-x {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
 /* Theme-specific overrides */
 .theme-day {
   /* Font overrides */
@@ -312,6 +285,7 @@
   --color-accent: var(--color-accent-day);
   --color-accent-soft: var(--color-accent-soft-day);
   --color-accent-glow: var(--color-accent-glow-day);
+  --color-scene: var(--color-scene-day);
   
   /* Motion overrides */
   --duration-micro: var(--duration-micro-day);
@@ -340,6 +314,7 @@
   --color-accent: var(--color-accent-night);
   --color-accent-soft: var(--color-accent-soft-night);
   --color-accent-glow: var(--color-accent-glow-night);
+  --color-scene: var(--color-scene-night);
   
   /* Motion overrides */
   --duration-micro: var(--duration-micro-night);
@@ -388,4 +363,5 @@
 /* Font utility classes for Day theme */
 .font-accent {
   font-family: var(--font-accent-day, "Dancing Script", ui-serif, serif);
+}
 }

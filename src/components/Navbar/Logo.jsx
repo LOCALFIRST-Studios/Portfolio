@@ -1,11 +1,9 @@
 import { NavLink } from "react-router-dom";
-import { useThemeSite } from "../../hooks/useThemeSite";
 import { useThemeClasses } from "../ThemeVariant";
+import { SITE } from "../../data/site";
 
 export default function Logo({ className = "" }) {
-  const site = useThemeSite();
-  
-  // Different typography styles for each theme
+  // Different typography styles for each theme - same content, different styling
   const logoClasses = useThemeClasses(
     "font-display text-sm tracking-[0.22em] uppercase", // Night theme
     "font-display text-base tracking-[0.1em]"           // Day theme - more editorial
@@ -13,7 +11,7 @@ export default function Logo({ className = "" }) {
 
   return (
     <NavLink to="/" end className={`${logoClasses} ${className}`}>
-      {site.name}
+      {SITE.name}
     </NavLink>
   );
 }
