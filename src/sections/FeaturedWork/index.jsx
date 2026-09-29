@@ -40,7 +40,7 @@ export default function FeaturedWork() {
   }, [reduced, isMobile]);
 
   return (
-    <section ref={sectionRef} className="overflow-hidden py-24">
+    <section ref={sectionRef} className="overflow-hidden py-24 theme-transition">
       <div className="container-wide">
         <p className="text-xs uppercase tracking-[0.2em] text-muted">Featured work</p>
         <h2 className="mt-3 max-w-3xl text-3xl md:text-5xl">Concept projects, not invented clients.</h2>

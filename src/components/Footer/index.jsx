@@ -4,7 +4,7 @@ import Container from "../Container";
 
 export default function Footer() {
   return (
-    <footer className="mt-24 border-t border-line py-12">
+    <footer className="mt-24 border-t border-line py-12 theme-transition">
       <Container wide className="grid gap-10 md:grid-cols-3">
         <div>
           <p className="font-display tracking-[0.2em] uppercase">{SITE.name}</p>

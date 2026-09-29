@@ -1,11 +1,13 @@
 import { useEffect, useRef } from "react";
 import useReducedMotion from "../hooks/useReducedMotion";
 import useMediaQuery from "../hooks/useMediaQuery";
+import { useTheme } from "../contexts/ThemeContext";
 
 export default function ParticleField() {
   const canvasRef = useRef(null);
   const reduced = useReducedMotion();
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const { isDayMode } = useTheme();
 
   useEffect(() => {
     if (reduced || isMobile) return undefined;
@@ -23,6 +25,13 @@ export default function ParticleField() {
       r: Math.random() * 1.4 + 0.4,
       s: Math.random() * 0.15 + 0.05,
     }));
+
+    // Theme-aware particle colors
+    const getParticleColor = () => {
+      return isDayMode 
+        ? "rgba(217, 119, 6, 0.4)"   // Day: warm amber
+        : "rgba(34, 211, 238, 0.35)"; // Night: electric cyan
+    };
 
     const resize = () => {
       width = canvas.offsetWidth;
@@ -47,7 +56,7 @@ export default function ParticleField() {
         if (p.x > 1) p.x = 0;
         if (p.x < 0) p.x = 1;
         ctx.beginPath();
-        ctx.fillStyle = "rgba(34, 211, 238, 0.35)";
+        ctx.fillStyle = getParticleColor();
         ctx.arc(p.x * width, p.y * height, p.r, 0, Math.PI * 2);
         ctx.fill();
       });
@@ -64,7 +73,7 @@ export default function ParticleField() {
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onMove);
     };
-  }, [reduced, isMobile]);
+  }, [reduced, isMobile, isDayMode]);
 
   if (reduced || isMobile) return null;
   return <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden />;

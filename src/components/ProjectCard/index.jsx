@@ -3,7 +3,7 @@ import ProjectMock from "./ProjectMock";
 
 export default function ProjectCard({ project, featured = false }) {
   return (
-    <article className={`group ${featured ? "min-w-[min(80vw,36rem)]" : ""}`}>
+    <article className={`group theme-transition ${featured ? "min-w-[min(80vw,36rem)]" : ""}`}>
       <ProjectMock id={project.id} />
       <p className="mt-5 text-xs uppercase tracking-[0.2em] text-accent">
         Project {project.number} · {project.label}

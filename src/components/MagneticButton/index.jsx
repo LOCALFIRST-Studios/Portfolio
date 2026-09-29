@@ -35,7 +35,7 @@ export default function MagneticButton({
     ref,
     onMouseMove: onMove,
     onMouseLeave: onLeave,
-    className: `inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition-[transform,box-shadow,color,background,border-color] duration-200 will-change-transform ${styles} ${className}`,
+    className: `inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition-[transform,box-shadow,color,background,border-color] duration-200 will-change-transform theme-transition ${styles} ${className}`,
     ...props,
   };
 

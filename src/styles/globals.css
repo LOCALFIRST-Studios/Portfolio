@@ -4,6 +4,16 @@
   --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
 
+  /* Night Theme Fonts (Dark) */
+  --font-display-night: "Syne", ui-sans-serif, system-ui, sans-serif;
+  --font-sans-night: "Outfit", ui-sans-serif, system-ui, sans-serif;
+
+  /* Day Theme Fonts (Light) */
+  --font-display-day: "Playfair Display", ui-serif, serif;
+  --font-accent-day: "Dancing Script", ui-serif, serif;
+  --font-sans-day: "Outfit", ui-sans-serif, system-ui, sans-serif;
+
+  /* Night Theme Colors (Dark Futuristic) */
   --color-bg: #07090d;
   --color-bg-elevated: #0c1016;
   --color-surface: #11171f;
@@ -15,15 +25,63 @@
   --color-accent-soft: rgba(34, 211, 238, 0.12);
   --color-accent-glow: rgba(34, 211, 238, 0.28);
 
+  --color-bg-night: #07090d;
+  --color-bg-elevated-night: #0c1016;
+  --color-surface-night: #11171f;
+  --color-line-night: rgba(232, 237, 242, 0.1);
+  --color-line-strong-night: rgba(232, 237, 242, 0.18);
+  --color-ink-night: #e8edf2;
+  --color-muted-night: #8b95a5;
+  --color-accent-night: #22d3ee;
+  --color-accent-soft-night: rgba(34, 211, 238, 0.12);
+  --color-accent-glow-night: rgba(34, 211, 238, 0.28);
+
+  /* Day Theme Colors (Light Editorial) */
+  --color-bg-day: #fefcfb;
+  --color-bg-elevated-day: #f8f6f4;
+  --color-surface-day: #f3f1ee;
+  --color-line-day: #e8e4e0;
+  --color-line-strong-day: #d6d0c8;
+  --color-ink-day: #1a1614;
+  --color-muted-day: #6b635c;
+  --color-accent-day: #d97706;
+  --color-accent-soft-day: rgba(217, 119, 6, 0.08);
+  --color-accent-glow-day: rgba(217, 119, 6, 0.15);
+
+  /* Spacing */
   --spacing-gutter: clamp(1.25rem, 4vw, 2.5rem);
   --container-max: 72rem;
   --container-wide: 86rem;
 
+  /* Day Theme Spacing (More generous) */
+  --section-padding-y-day: 120px;
+  --section-padding-y-mobile-day: 80px;
+  --grid-gap-day: 48px;
+  --card-padding-day: 32px;
+
+  /* Motion - Night Theme */
   --ease-out-premium: cubic-bezier(0.22, 1, 0.36, 1);
   --duration-micro: 200ms;
   --duration-reveal: 650ms;
   --duration-hero: 1100ms;
   --duration-page: 520ms;
+
+  --duration-micro-night: 200ms;
+  --duration-reveal-night: 650ms;
+  --duration-hero-night: 1100ms;
+  --duration-page-night: 520ms;
+  --ease-night: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Motion - Day Theme (Editorial timing) */
+  --duration-micro-day: 150ms;
+  --duration-standard-day: 300ms;
+  --duration-section-day: 500ms;
+  --ease-day: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Card Design - Day Theme */
+  --border-radius-card-day: 12px;
+  --shadow-card-day: 0 4px 24px rgba(26, 22, 20, 0.08);
+  --shadow-card-hover-day: 0 8px 40px rgba(26, 22, 20, 0.12);
 }
 
 @layer base {
@@ -35,6 +93,41 @@
   *::before,
   *::after {
     box-sizing: border-box;
+  }
+
+  /* Smooth theme transitions for all elements */
+  *,
+  *::before,
+  *::after {
+    transition: 
+      background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Disable transitions for elements that should remain instant */
+  .no-transition,
+  .no-transition *,
+  [data-no-transition],
+  [data-no-transition] * {
+    transition: none !important;
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition: none !important;
+    }
+    
+    .theme-transition,
+    .theme-transition-fast,
+    .theme-transition-slow {
+      transition: none !important;
+    }
   }
 
   html.lenis,
@@ -131,6 +224,34 @@
     margin-inline: auto;
   }
 
+  /* Theme transition utility classes */
+  .theme-transition {
+    transition: 
+      background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .theme-transition-fast {
+    transition: 
+      background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+      color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .theme-transition-slow {
+    transition: 
+      background-color 500ms cubic-bezier(0.4, 0, 0.2, 1),
+      color 500ms cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 500ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 500ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
   .hairline-grid {
     background-image:
       linear-gradient(to right, var(--color-line) 1px, transparent 1px),
@@ -172,4 +293,99 @@
   to {
     transform: translateX(-50%);
   }
+}
+/* Theme-specific overrides */
+.theme-day {
+  /* Font overrides */
+  --font-display: var(--font-display-day);
+  --font-accent: var(--font-accent-day);
+  --font-sans: var(--font-sans-day);
+  
+  /* Color overrides */
+  --color-bg: var(--color-bg-day);
+  --color-bg-elevated: var(--color-bg-elevated-day);
+  --color-surface: var(--color-surface-day);
+  --color-line: var(--color-line-day);
+  --color-line-strong: var(--color-line-strong-day);
+  --color-ink: var(--color-ink-day);
+  --color-muted: var(--color-muted-day);
+  --color-accent: var(--color-accent-day);
+  --color-accent-soft: var(--color-accent-soft-day);
+  --color-accent-glow: var(--color-accent-glow-day);
+  
+  /* Motion overrides */
+  --duration-micro: var(--duration-micro-day);
+  --duration-reveal: var(--duration-standard-day);
+  --duration-hero: var(--duration-section-day);
+  --duration-page: var(--duration-standard-day);
+  --ease-out-premium: var(--ease-day);
+  
+  /* Update color scheme for system integration */
+  color-scheme: light;
+}
+
+.theme-night {
+  /* Font overrides */
+  --font-display: var(--font-display-night);
+  --font-sans: var(--font-sans-night);
+  
+  /* Color overrides */
+  --color-bg: var(--color-bg-night);
+  --color-bg-elevated: var(--color-bg-elevated-night);
+  --color-surface: var(--color-surface-night);
+  --color-line: var(--color-line-night);
+  --color-line-strong: var(--color-line-strong-night);
+  --color-ink: var(--color-ink-night);
+  --color-muted: var(--color-muted-night);
+  --color-accent: var(--color-accent-night);
+  --color-accent-soft: var(--color-accent-soft-night);
+  --color-accent-glow: var(--color-accent-glow-night);
+  
+  /* Motion overrides */
+  --duration-micro: var(--duration-micro-night);
+  --duration-reveal: var(--duration-reveal-night);
+  --duration-hero: var(--duration-hero-night);
+  --duration-page: var(--duration-page-night);
+  --ease-out-premium: var(--ease-night);
+  
+  /* Update color scheme for system integration */
+  color-scheme: dark;
+}
+
+.theme-day .font-display {
+  font-family: var(--font-display-day);
+}
+
+.theme-day .font-accent {
+  font-family: var(--font-accent-day);
+}
+
+.theme-day .font-sans {
+  font-family: var(--font-sans-day);
+}
+
+.theme-night .font-display {
+  font-family: var(--font-display-night);
+}
+
+.theme-night .font-sans {
+  font-family: var(--font-sans-night);
+}
+
+/* Day-specific utility classes */
+.theme-day .card-day {
+  border-radius: var(--border-radius-card-day);
+  box-shadow: var(--shadow-card-day);
+  padding: var(--card-padding-day);
+  transition: all var(--duration-standard-day) var(--ease-day);
+}
+
+.theme-day .card-day:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover-day);
+}
+
+/* Font utility classes for Day theme */
+.font-accent {
+  font-family: var(--font-accent-day, "Dancing Script", ui-serif, serif);
 }

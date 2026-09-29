@@ -11,7 +11,7 @@ export default function Services() {
           {services.map((service, index) => (
             <article
               key={service.number}
-              className="sticky rounded-3xl border border-line bg-bg-elevated/90 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.25)] backdrop-blur-sm md:p-12"
+              className="sticky rounded-3xl border border-line bg-bg-elevated/90 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.25)] backdrop-blur-sm theme-transition md:p-12"
               style={{ top: `${5.5 + index * 1.25}rem` }}
             >
               <p className="text-sm text-accent">{service.number}</p>

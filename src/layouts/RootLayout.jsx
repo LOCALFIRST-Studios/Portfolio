@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Preloader from "../components/Preloader";
 import PageTransition from "../components/PageTransition";
+import ThemeToggle from "../components/ThemeToggle";
+import ThemeDemo from "../components/ThemeDemo";
 import useLenis from "../hooks/useLenis";
 
 export default function RootLayout() {
@@ -26,7 +28,7 @@ export default function RootLayout() {
   const onPreloaderDone = useCallback(() => setReady(true), []);
 
   return (
-    <div className="min-h-dvh bg-bg text-ink">
+    <div className="min-h-dvh bg-bg text-ink theme-transition">
       {!ready && !isDemo && <Preloader onDone={onPreloaderDone} />}
       <PageTransition />
       <a
@@ -42,6 +44,7 @@ export default function RootLayout() {
         </Suspense>
       </main>
       {!isDemo && <Footer />}
+      <ThemeToggle />
     </div>
   );
 }

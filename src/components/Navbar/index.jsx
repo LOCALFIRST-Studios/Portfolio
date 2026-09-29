@@ -29,7 +29,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b transition-[background,border-color,backdrop-filter] duration-200 ${
+      className={`sticky top-0 z-40 border-b transition-[background,border-color,backdrop-filter] duration-200 theme-transition ${
         scrolled || open
           ? "border-line bg-[rgba(7,9,13,0.88)] backdrop-blur-xl"
           : "border-transparent bg-[rgba(7,9,13,0.35)] backdrop-blur-md"
