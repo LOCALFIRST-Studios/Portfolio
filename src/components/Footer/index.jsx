@@ -15,7 +15,7 @@ export default function Footer() {
           <ul className="mt-3 space-y-2">
             {NAV_LINKS.map((link) => (
               <li key={link.to}>
-                <NavLink to={link.to} className="text-sm hover:text-accent">
+                <NavLink to={link.to} end={link.to === "/"} className="text-sm hover:text-accent">
                   {link.label}
                 </NavLink>
               </li>

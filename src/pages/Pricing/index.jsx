@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import MagneticButton from "../../components/MagneticButton";
 import Container from "../../components/Container";
 import Seo from "../../components/Seo";
 import { addOns, includedEverywhere, pricingNotes, pricingTiers } from "../../data/pricing";
@@ -40,7 +41,7 @@ export default function Pricing() {
                 ))}
               </ul>
               <Link to="/contact" className="mt-8 inline-block text-sm text-accent">
-                Start with {tier.name}
+                Get Started
               </Link>
             </article>
           ))}
@@ -143,9 +144,9 @@ export default function Pricing() {
               </div>
             ))}
           </dl>
-          <Link to="/contact" className="mt-10 inline-block rounded-full bg-accent px-6 py-3 text-sm font-medium text-bg">
+          <MagneticButton to="/contact" className="mt-10">
             Start a Project
-          </Link>
+          </MagneticButton>
         </Container>
       </section>
 

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function useLenis() {
   const reduced = useReducedMotion();
+  const lenisRef = useRef(null);
 
   useEffect(() => {
     if (reduced) return undefined;
@@ -16,6 +17,7 @@ export default function useLenis() {
       duration: 1.1,
       smoothWheel: true,
     });
+    lenisRef.current = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);
     const ticker = (time) => {
@@ -27,6 +29,9 @@ export default function useLenis() {
     return () => {
       gsap.ticker.remove(ticker);
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, [reduced]);
+
+  return lenisRef;
 }

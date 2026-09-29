@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
-import { Suspense } from "react";
+import { useCallback, useEffect, useState, Suspense } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Preloader from "../components/Preloader";
@@ -10,16 +10,18 @@ import useLenis from "../hooks/useLenis";
 export default function RootLayout() {
   const { pathname } = useLocation();
   const isDemo = pathname.startsWith("/demos");
+  const lenisRef = useLenis();
   const [ready, setReady] = useState(() => {
     if (typeof window === "undefined") return false;
     return sessionStorage.getItem("lf-preloader") === "1";
   });
 
-  useLenis();
-
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, [pathname]);
+    const lenis = lenisRef.current;
+    if (lenis) lenis.scrollTo(0, { immediate: true });
+    else window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+  }, [pathname, lenisRef]);
 
   const onPreloaderDone = useCallback(() => setReady(true), []);
 
@@ -34,7 +36,7 @@ export default function RootLayout() {
         Skip to content
       </a>
       {!isDemo && <Navbar />}
-      <main id="main">
+      <main id="main" aria-busy={!ready && !isDemo}>
         <Suspense fallback={<div className="py-32 text-center text-muted">Loading…</div>}>
           <Outlet />
         </Suspense>

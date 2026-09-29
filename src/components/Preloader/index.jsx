@@ -40,7 +40,12 @@ export default function Preloader({ onDone }) {
   }, [onDone, reduced]);
 
   return (
-    <div className="fixed inset-0 z-[80] flex flex-col justify-between bg-bg px-8 py-10">
+    <div
+      className="fixed inset-0 z-[80] flex flex-col justify-between bg-bg px-8 py-10"
+      role="status"
+      aria-live="polite"
+      aria-label="Loading"
+    >
       <p className="font-display text-sm tracking-[0.28em] uppercase">{SITE.name}</p>
       <div>
         <p className="text-xs tracking-[0.3em] text-muted">LOADING</p>

@@ -42,6 +42,7 @@ export default function Navbar() {
             <NavLink
               key={link.to}
               to={link.to}
+              end={link.to === "/"}
               className={({ isActive }) =>
                 `relative transition-colors duration-200 hover:text-ink after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-200 hover:after:scale-x-100 ${
                   isActive ? "text-ink after:scale-x-100" : ""
@@ -77,7 +78,7 @@ export default function Navbar() {
         >
           <div className="flex flex-col gap-6 text-3xl font-display">
             {NAV_LINKS.map((link) => (
-              <NavLink key={link.to} to={link.to}>
+              <NavLink key={link.to} to={link.to} end={link.to === "/"}>
                 {link.label}
               </NavLink>
             ))}

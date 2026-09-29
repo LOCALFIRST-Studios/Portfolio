@@ -3,7 +3,7 @@ import { SITE } from "../../data/site";
 
 export default function Logo({ className = "" }) {
   return (
-    <NavLink to="/" className={`font-display text-sm tracking-[0.22em] uppercase ${className}`}>
+    <NavLink to="/" end className={`font-display text-sm tracking-[0.22em] uppercase ${className}`}>
       {SITE.name}
     </NavLink>
   );

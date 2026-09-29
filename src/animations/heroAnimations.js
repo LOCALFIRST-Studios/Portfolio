@@ -2,16 +2,32 @@ import gsap from "gsap";
 import { MOTION } from "./motionConfig";
 
 export function splitHeadline(node) {
-  const text = node.textContent;
+  const text = node.textContent.trim();
   node.textContent = "";
-  const chars = [...text].map((char) => {
-    const span = document.createElement("span");
-    span.textContent = char === " " ? "\u00A0" : char;
-    span.style.display = "inline-block";
-    span.style.willChange = "transform, opacity, filter";
-    node.appendChild(span);
-    return span;
+  const chars = [];
+
+  text.split(" ").forEach((word, index, words) => {
+    const wordWrap = document.createElement("span");
+    wordWrap.style.display = "inline-block";
+    wordWrap.style.overflow = "hidden";
+    wordWrap.style.whiteSpace = "nowrap";
+    wordWrap.style.verticalAlign = "bottom";
+
+    [...word].forEach((char) => {
+      const span = document.createElement("span");
+      span.textContent = char;
+      span.style.display = "inline-block";
+      span.style.willChange = "transform, opacity, filter";
+      wordWrap.appendChild(span);
+      chars.push(span);
+    });
+
+    node.appendChild(wordWrap);
+    if (index < words.length - 1) {
+      node.appendChild(document.createTextNode(" "));
+    }
   });
+
   return chars;
 }
 

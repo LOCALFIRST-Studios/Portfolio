@@ -19,7 +19,8 @@ export function revealSections(root, reduced) {
         ease: MOTION.reveal.ease,
         scrollTrigger: {
           trigger: el,
-          start: "top 85%",
+          start: "top 88%",
+          once: true,
         },
       },
     ),

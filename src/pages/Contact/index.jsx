@@ -111,11 +111,11 @@ export default function Contact() {
           <form onSubmit={onSubmit} className="grid gap-4 rounded-2xl border border-line p-6 md:p-8">
             <label className="grid gap-2 text-sm">
               Name
-              <input name="name" required className="rounded-lg border border-line bg-bg-elevated px-3 py-2" />
+              <input name="name" autoComplete="name" required className="rounded-lg border border-line bg-bg-elevated px-3 py-2" />
             </label>
             <label className="grid gap-2 text-sm">
               Business name
-              <input name="business" required className="rounded-lg border border-line bg-bg-elevated px-3 py-2" />
+              <input name="business" autoComplete="organization" required className="rounded-lg border border-line bg-bg-elevated px-3 py-2" />
             </label>
             <label className="grid gap-2 text-sm">
               Business type
@@ -127,7 +127,7 @@ export default function Contact() {
             </label>
             <label className="grid gap-2 text-sm">
               Phone / WhatsApp
-              <input name="phone" required className="rounded-lg border border-line bg-bg-elevated px-3 py-2" />
+              <input name="phone" autoComplete="tel" required className="rounded-lg border border-line bg-bg-elevated px-3 py-2" />
             </label>
             <label className="grid gap-2 text-sm">
               What do you need?
