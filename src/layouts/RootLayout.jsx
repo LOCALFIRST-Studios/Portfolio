@@ -6,7 +6,6 @@ import Footer from "../components/Footer";
 import Preloader from "../components/Preloader";
 import PageTransition from "../components/PageTransition";
 import ThemeToggle from "../components/ThemeToggle";
-import ThemeDemo from "../components/ThemeDemo";
 import useLenis from "../hooks/useLenis";
 
 export default function RootLayout() {

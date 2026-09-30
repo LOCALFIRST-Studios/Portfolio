@@ -21,7 +21,6 @@ export default function FeaturedWork() {
     if (!section || !track) return undefined;
 
     const ctx = gsap.context(() => {
-      if (window.matchMedia("(max-width: 768px)").matches) return;
       const distance = () => Math.max(0, track.scrollWidth - section.offsetWidth);
       gsap.to(track, {
         x: () => -distance(),

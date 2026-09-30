@@ -9,114 +9,166 @@ export default function Hero() {
   const headingRef = useRef(null);
   const descriptionRef = useRef(null);
   const ctaRef = useRef(null);
-  const videoRef = useRef(null);
   const reduced = useReducedMotion();
   const { isDayMode } = useTheme();
 
   useEffect(() => {
-    if (reduced) return;
-    
+    const els = [labelRef.current, headingRef.current, descriptionRef.current, ctaRef.current];
+
+    if (reduced) {
+      // Reduced motion: skip animation, make everything immediately visible
+      els.forEach(el => {
+        if (el) gsap.set(el, { opacity: 1, y: 0 });
+      });
+      return;
+    }
+
+    // Set initial state explicitly so GSAP owns it from the start
+    els.forEach(el => {
+      if (el) gsap.set(el, { opacity: 0, y: 30 });
+    });
+    if (headingRef.current) gsap.set(headingRef.current, { y: 50 });
+
     // Hero content entrance animation with staggered timing
-    const tl = gsap.timeline({ delay: 0.5 });
-    
-    tl.from(labelRef.current, {
-      y: 20,
-      opacity: 0,
-      duration: 0.6,
-      ease: "power2.out"
-    })
-    .from(headingRef.current, {
-      y: 30,
-      opacity: 0,
+    const tl = gsap.timeline({ delay: 0.6 });
+
+    tl.to(labelRef.current, {
+      y: 0,
+      opacity: 1,
       duration: 0.8,
       ease: "power2.out"
-    }, "-=0.4")
-    .from(descriptionRef.current, {
-      y: 20,
-      opacity: 0,
-      duration: 0.6,
+    })
+    .to(headingRef.current, {
+      y: 0,
+      opacity: 1,
+      duration: 1.2,
       ease: "power2.out"
     }, "-=0.5")
-    .from(ctaRef.current, {
-      y: 20,
-      opacity: 0,
-      duration: 0.6,
+    .to(descriptionRef.current, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
       ease: "power2.out"
-    }, "-=0.4");
+    }, "-=0.8")
+    .to(ctaRef.current, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      ease: "power2.out"
+    }, "-=0.6");
 
-    return () => tl.kill();
+    return () => {
+      tl.kill();
+      // Clear inline styles so a re-mount starts clean
+      els.forEach(el => {
+        if (el) gsap.set(el, { clearProps: "opacity,y,transform" });
+      });
+    };
   }, [reduced]);
 
+  const overlayOpacity = isDayMode ? 'rgba(0, 0, 0, 0.25)' : 'rgba(0, 0, 0, 0.35)';
+
   return (
-    <section className="relative h-screen min-h-[500px] max-h-[800px] md:min-h-[600px] lg:max-h-none overflow-hidden theme-transition">
+    <section 
+      className="relative h-screen overflow-hidden"
+      style={{ minHeight: '500px', maxHeight: '900px' }}
+    >
+      {/* Fallback background — sits behind the video */}
+      <div 
+        className="absolute inset-0"
+        style={{ 
+          zIndex: 0,
+          background: 'linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #000000 100%)'
+        }}
+      />
+
       {/* Video Background */}
       <video
-        ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover hero-video-bg"
         autoPlay
         muted
         loop
         playsInline
-        onError={(e) => {
-          console.warn('Video failed to load:', e);
-        }}
       >
         <source src="/landingpage.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
-      {/* Fallback background if video fails */}
+      {/* Overlay for readability */}
       <div 
-        className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black opacity-0"
+        className="absolute inset-0 hero-overlay"
         style={{ 
-          zIndex: -1,
-          backgroundImage: 'linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #000000 100%)'
+          backgroundColor: overlayOpacity,
+          backdropFilter: 'blur(0.5px)',
+          transition: 'background-color 300ms ease'
         }}
-      />
-
-      {/* Theme-aware overlay for text readability */}
-      <div 
-        className={`absolute inset-0 theme-transition ${
-          isDayMode 
-            ? 'bg-white/5 backdrop-blur-[0.5px]' 
-            : 'bg-black/25 backdrop-blur-[0.5px]'
-        }`}
       />
       
       {/* Hero Content */}
-      <div className="container-site relative z-10 flex h-full items-center px-4 md:px-6">
-        <div className="max-w-5xl">
+      <div 
+        className="absolute inset-0 flex items-center justify-center px-4 md:px-6 hero-content"
+      >
+        <div className="w-full max-w-6xl text-center">
+          {/* Label */}
           <p 
             ref={labelRef}
-            className={`text-xs md:text-sm uppercase tracking-[0.22em] theme-transition ${
-              isDayMode ? 'text-white/95' : 'text-white/90'
-            }`}
+            className="text-xs md:text-sm uppercase tracking-widest mb-8 md:mb-12 text-cream opacity-90"
           >
-            Independent web studio
+            Independent creative studio
           </p>
           
+          {/* Main Headline */}
           <h1
             ref={headingRef}
-            className="mt-4 md:mt-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium leading-[0.95] text-white drop-shadow-lg"
+            className="font-light tracking-tight mb-8 md:mb-12 text-cream font-serif"
+            style={{ 
+              fontSize: 'clamp(2.5rem, 8vw, 6rem)',
+              textShadow: '0 4px 16px rgba(0,0,0,0.7)',
+              lineHeight: '0.9',
+              fontWeight: '300'
+            }}
           >
-            WE BUILD DIGITAL EXPERIENCES THAT GET NOTICED.
+            WE BUILD DIGITAL<br />
+            EXPERIENCES THAT<br />
+            GET NOTICED.
           </h1>
           
+          {/* Description */}
           <p 
             ref={descriptionRef}
-            className={`mt-4 md:mt-6 max-w-xl text-base md:text-lg lg:text-xl theme-transition ${
-              isDayMode ? 'text-white/95' : 'text-white/85'
-            }`}
+            className="max-w-2xl mx-auto text-base md:text-lg lg:text-xl leading-relaxed mb-12 md:mb-16 text-cream opacity-90"
           >
             Premium websites for gyms, salons, cafés, PGs and ambitious local businesses.
           </p>
           
+          {/* Call to Action */}
           <div 
             ref={ctaRef}
-            className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <MagneticButton to="/work">View Our Work</MagneticButton>
-            <MagneticButton to="/contact" variant="ghost">
+            <MagneticButton 
+              to="/work" 
+              className="px-8 py-4 text-base font-medium rounded-full"
+              style={{
+                backgroundColor: 'var(--color-cream)',
+                color: 'var(--color-bg)',
+                border: 'none',
+                minWidth: '160px'
+              }}
+            >
+              View Our Work
+            </MagneticButton>
+            <MagneticButton 
+              to="/contact" 
+              variant="ghost" 
+              className="px-8 py-4 text-base rounded-full border-2"
+              style={{
+                color: 'var(--color-cream)',
+                borderColor: 'var(--color-cream)',
+                backgroundColor: 'transparent',
+                minWidth: '160px'
+              }}
+            >
               Start a Project
             </MagneticButton>
           </div>

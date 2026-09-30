@@ -2,7 +2,7 @@ import { marqueeItems } from "../../data/services";
 import useReducedMotion from "../../hooks/useReducedMotion";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import { useTheme } from "../../contexts/ThemeContext";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import gsap from "gsap";
 
 export default function Marquee() {
@@ -13,7 +13,6 @@ export default function Marquee() {
   const reduced = useReducedMotion();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const { isDayMode } = useTheme();
-  const [hoveredIndex, setHoveredIndex] = useState(-1);
 
   // Theme-aware colors
   const colors = {

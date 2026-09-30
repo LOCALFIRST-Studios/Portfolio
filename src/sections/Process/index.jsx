@@ -13,7 +13,6 @@ export default function Process() {
               <span className="text-accent">{step.number}</span>
               <span className="text-2xl md:text-3xl">
                 {step.title}
-                {index < processSteps.length - 1 ? "" : ""}
               </span>
             </li>
           ))}

@@ -1,12 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-// Theme variants
 export const THEMES = {
   NIGHT: "night",
   DAY: "day",
 };
 
-// Default theme configuration
 const THEME_CONFIG = {
   [THEMES.NIGHT]: {
     name: "Local First",
@@ -14,7 +12,7 @@ const THEME_CONFIG = {
     class: "theme-night",
   },
   [THEMES.DAY]: {
-    name: "Local First Studios", 
+    name: "Local First Studios",
     description: "Light editorial design",
     class: "theme-day",
   },
@@ -30,7 +28,7 @@ export function ThemeProvider({ children }) {
     const urlParams = new URLSearchParams(window.location.search);
     const urlTheme = urlParams.get("theme");
     const savedTheme = localStorage.getItem("lf-theme");
-    
+
     if (urlTheme && Object.values(THEMES).includes(urlTheme)) {
       setCurrentTheme(urlTheme);
       localStorage.setItem("lf-theme", urlTheme);
@@ -49,8 +47,7 @@ export function ThemeProvider({ children }) {
     if (Object.values(THEMES).includes(theme)) {
       setCurrentTheme(theme);
       localStorage.setItem("lf-theme", theme);
-      
-      // Update URL without page reload
+
       const url = new URL(window.location);
       url.searchParams.set("theme", theme);
       window.history.replaceState({}, "", url);
@@ -62,21 +59,19 @@ export function ThemeProvider({ children }) {
     switchTheme(newTheme);
   };
 
-  // Keyboard shortcut for theme toggle (Cmd/Ctrl + Shift + T)
+  // Keyboard shortcut: Cmd/Ctrl + Shift + T
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === 'T') {
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === "T") {
         e.preventDefault();
         toggleTheme();
       }
     };
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, [toggleTheme]);
 
   const isDayMode = currentTheme === THEMES.DAY;
-  const isNightMode = currentTheme === THEMES.NIGHT;
 
   const value = {
     currentTheme,
@@ -84,7 +79,6 @@ export function ThemeProvider({ children }) {
     switchTheme,
     toggleTheme,
     isDayMode,
-    isNightMode,
     themes: THEME_CONFIG,
   };
 
@@ -101,10 +95,4 @@ export function useTheme() {
     throw new Error("useTheme must be used within a ThemeProvider");
   }
   return context;
-}
-
-// Hook for conditional rendering based on theme
-export function useThemeVariant(nightComponent, dayComponent) {
-  const { isDayMode } = useTheme();
-  return isDayMode ? dayComponent : nightComponent;
 }
